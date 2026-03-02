@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+    {% block title %}Customer Name From{% endblock %}
+    {% block header %}Welcome to the new customer name form{% endblock %}
+
+    {% block content %}
+    <!-- Insert page contents here -->
+    <div class="container mt-4">
+        <div class="col-lg-6 mx-auto">
+            <form method="post" class="submission-form">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label class="form-label">First Name</label>
+                    {{ form.first_name }}
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Last Name</label>
+                    {{ form.last_name }}
+                </div>
+
+                <button type="submit" class="btn btn-primary"
+                    {% if is_edit %}onclick="return confirm('Save changes to this record?');"{% endif %}>
+                    {% if is_edit %}Save Changes{% else %}Next{% endif %}
+                </button>
+            </form>
+        </div>
+    </div>
+    {% endblock %}

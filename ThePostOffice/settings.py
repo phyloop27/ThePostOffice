@@ -55,7 +55,7 @@ ROOT_URLCONF = 'ThePostOffice.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
+        'DIRS': [BASE_DIR / 'ThePostOfficeApp/templates']
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -76,8 +76,13 @@ WSGI_APPLICATION = 'ThePostOffice.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'bnargymiqxix3z2xrke5',
+        'USER' : 'udzzbe1u0ewqhm2q',
+        'PASSWORD' : 'TYQ0GCvcklhDCB3NPcBz',
+        'HOST' : 'bnargymiqxix3z2xrke5-mysql.services.clever-cloud.com',
+        'PORT' : '3306',
+
     }
 }
 

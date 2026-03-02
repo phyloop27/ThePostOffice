@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+    {% block title %}Customer Address From{% endblock %}
+    {% block header %}Welcome to the new customer address form{% endblock %}
+
+    {% block content %}
+        <!-- Insert page contents here -->
+        <form method="post" class="submission-form">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label class="form-label">House .No</label>
+                {{ form.house_no }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">House Name</label>
+                {{ form.house_name }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Street</label>
+                {{ form.street }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Town</label>
+                {{ form.town }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Post Code</label>
+                {{ form.post_code }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Date</label>
+                {{ form.date_field }}
+            </div>
+
+            <button type="submit" class="btn btn-primary"
+                {% if is_edit %}onclick="return confirm('Save changes to this record?');"{% endif %}>
+                {% if is_edit %}Save Changes{% else %}Next{% endif %}
+            </button>
+        </form>
+
+    {% endblock %}

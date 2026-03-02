@@ -15,8 +15,23 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from ThePostOfficeApp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('landing/', views.landing, name='landing'),
+    path('login/', views.login, name='login'),
+    path('home/', views.home, name='home'),
+    path('', views.home, name='home'), # Remove this On completion!! Change to Login page!!!!
+    path('formName/', views.formName, name='formName'),
+    path('formAddress/', views.formAddress, name='formAddress'),
+    path('formPostage/', views.formPostage, name='formPostage'),
+    path('formSuccess', views.formSuccess, name='formSuccess'),
+    path('customerDetails/', views.customerDetails, name='customerDetails'),
+    path('postedItems', views.postedItems, name='postedItems'),
+    path('prices/', views.prices, name='prices'),
+    path('postOfficeSales/', views.postOfficeSales, name='postOfficeSales'),
+    path('delete/', views.delete, name='delete'),
+    path('update/', views.update, name='update'),
 ]

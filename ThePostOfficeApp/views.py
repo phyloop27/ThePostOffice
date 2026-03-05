@@ -1,9 +1,8 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
-from .models import *
 from .forms import *
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import *
+from django.db import transaction
 
-# Create your views here.
 def landing(request):
     return render(request, 'landing_page.html')
 
@@ -14,45 +13,117 @@ def home(request):
     return render(request, 'home.html')
 
 def customerDetails(request):
-    return render(request, 'customer_details.html')
+    customer_list = Name.objects.select_related("address").all()
+    return render(request, "customer_details.html", {"customer_list": customer_list})
 
 def postedItems(request):
-    return render(request, 'posted_items.html')
+    parcel_list = Parcel.objects.select_related("address").all()
+    letter_list = Letter.objects.select_related("address").all()
+    return render(request, "posted_items.html", {"parcel_list": parcel_list, "letter_list" : letter_list})
 
-def prices(request):
-    return render(request, 'prices.html')
-
-def postOfficeSales(request):
-    return render(request, 'post_office_sales.html')
 
 def formName(request):
     if request.method == "POST":
-        form = FormName(request.POST) # This should be calling the '(form name)' From forms.py
-        if form.is_valid():
-            form.save()
-            return redirect("formAddress") # Next webpage to render to
-    else:
-        form = FormName() # This should be calling the '(form name)' From forms.py
-    return render(request, "form_name.html", {"form": form})
+        name_form = NameForm(request.POST)
+        address_form = AddressForm(request.POST)
 
-def formAddress(request):
+        if name_form.is_valid() and address_form.is_valid():
+            with transaction.atomic():
+                name = name_form.save()
+                address = address_form.save(commit=False)
+                # sharing pk here -
+                address.name = name
+                address.save()
+
+            return redirect("formLetter", name_id=name.pk)
+    else:
+        name_form = NameForm()
+        address_form = AddressForm()
+
+    return render(request,"form_name.html",
+                  {"name_form": name_form, "address_form": address_form})
+
+
+def formLetter(request, name_id):
+    #print('formLetter name_id:', name_id)
+    # pulling name_id from the input to aline letter to address
+    address = get_object_or_404(Address, pk=name_id)
+
     if request.method == "POST":
-        form = FormAddress(request.POST) # This should be calling the '(form name)' From forms.py
+        form = PostLetterForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect("formPostage") # Next webpage to render to
-    else:
-        form = FormAddress() # This should be calling the '(form name)' From forms.py
-    return render(request, 'form_address.html', {"form": form})
+            # creating letter object
+            Letter.objects.create(
+                address = address,
+                letter_sent = form.cleaned_data["letter_sent"],
+                class_field = form.cleaned_data["class_field"],
+            )
 
-def formPostage(request):
-    return render(request, 'form_postage.html')
+            return redirect("formSuccess")
+    else:
+        form = PostLetterForm()
+    return render(request, "form_letter.html", {"form": form, "name_id" : name_id})
+
+
+def formParcel(request, name_id):
+    #print('formParcel name_id:', name_id)
+    # pulling name_id from the input to aline letter to address
+    address = get_object_or_404(Address, pk=name_id)
+
+    if request.method == "POST":
+        form = PostParcelForm(request.POST)
+        if form.is_valid():
+
+            # create Parcel object
+            Parcel.objects.create(
+                address = address,
+                courier = form.cleaned_data["courier"],
+                parcel_sent = form.cleaned_data["parcel_sent"],
+                service = form.cleaned_data["service"],
+                weight = form.cleaned_data["weight"],
+            )
+
+            return redirect("formSuccess")
+    else:
+        form = PostParcelForm()
+    return render(request, "form_parcel.html", {"form": form, "name_id" : name_id})
+
 
 def formSuccess(request):
     return render(request, 'form_success.html')
 
-def delete(request):
-    return render(request, 'delete.html')
 
-def update(request):
-    return render(request, 'update.html')
+def delete(request, identifier):
+    # Deleting record using 'pk' Values
+    customer = get_object_or_404(Name, pk=identifier)
+    if request.method == "POST":
+        customer.delete()
+        return redirect("customerDetails")
+    return render(request, "delete.html", {"customer": customer})
+
+def update(request, identifier):
+    customer = get_object_or_404(Name, identifier=identifier)
+    address = get_object_or_404(Address, pk=customer.pk)
+
+    if request.method == "POST":
+        name_form = NameForm(request.POST, instance=customer)
+        address_form = AddressForm(request.POST, instance=address)
+
+        if name_form.is_valid() and address_form.is_valid():
+            with transaction.atomic():
+                name_form.save()
+                address_form.save()
+            return redirect("customerDetails")
+    else:
+        name_form = NameForm(instance=customer)
+        address_form = AddressForm(instance=address)
+
+    return render(request,"update.html",{
+            "name_form": name_form,
+            "address_form": address_form,
+            "customer": customer,
+            "is_edit": True,
+        })
+
+
+

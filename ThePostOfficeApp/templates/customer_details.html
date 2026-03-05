@@ -4,6 +4,59 @@
     {% block header %}Welcome to the customer details Page{% endblock %}
 
     {% block content %}
-        <!-- Insert page contents here -->
+        <div class="container-fluid mt-4">
+              <div class="student-records">
+                    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+                        <h4 class="mb-0">Customer Records</h4>
+                        <a class="btn btn-primary" href="/formName/">Add Customer</a>
+                    </div>
+                    <!-- Table record headings  -->
+                    {% if customer_list %}
+                        <div class="table-responsive">
+                          <table class="table table-striped align-middle">
+                            <thead>
+                                <tr>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>House No</th>
+                                <th>House Name</th>
+                                <th>Street</th>
+                                <th>Town</th>
+                                <th>Post Code</th>
+                                <th class="text-end">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
+                            {% for n in customer_list %}
+                                <tr>
+                                    <td>{{ n.first_name }}</td>
+                                    <td>{{ n.last_name }}</td>
+                                    <td>{{ n.address.house_no }}</td>
+                                    <td>{{ n.address.house_name }}</td>
+                                    <td>{{ n.address.street }}</td>
+                                    <td>{{ n.address.town }}</td>
+                                    <td>{{ n.address.post_code }}</td>
+                                    <td class="text-end">
+
+                                    <a class="btn btn-sm btn-outline-primary" href="{% url 'update' n.identifier %}">
+                                        Update
+                                    </a>
+                                    <a class="btn btn-sm btn-outline-primary" href="{% url 'delete' n.identifier %}">
+                                        Delete
+                                    </a>
+
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        </div>
+                    {% else %}
+                        <p class="text-muted mb-0">No Customer Details Found.</p>
+                    {% endif %}
+                <!--</div>-->
+            </div>
+            <br>
+        </div>
     {% endblock %}

@@ -4,6 +4,21 @@
     {% block header %}Confirm Update{% endblock %}
 
     {% block content %}
-        <!-- Insert page contents here -->
+    <!-- Insert page contents here -->
+        <div class="container-fluid mt-4">
+            <div class="student-records">
+            <h3>Update Form</h3>
+                <form method="post">
+                {% csrf_token %}
 
+                    <h3>Name</h3>
+                    {{ name_form.as_p }}
+
+                    <h3>Address</h3>
+                    {{ address_form.as_p }}
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
     {% endblock %}

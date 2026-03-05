@@ -4,27 +4,73 @@
     {% block header %}Welcome to the new customer name form{% endblock %}
 
     {% block content %}
-    <!-- Insert page contents here -->
-    <div class="container mt-4">
-        <div class="col-lg-6 mx-auto">
-            <form method="post" class="submission-form">
-                {% csrf_token %}
+    <div class="container-fluid mt-4">
+        <div class="student-records">
+            <form method="post">
+            {% csrf_token %}
+
+                <h3>Name</h3>
 
                 <div class="mb-3">
-                    <label class="form-label">First Name</label>
-                    {{ form.first_name }}
+                    <label class="form-label" for="{{ name_form.first_name.id_for_label }}">First name</label>
+                        {{ name_form.first_name }}
+                        {% if name_form.first_name.errors %}
+                        <div class="text-danger">{{ name_form.first_name.errors }}</div>
+                    {% endif %}
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Last Name</label>
-                    {{ form.last_name }}
+                    <label class="form-label" for="{{ name_form.last_name.id_for_label }}">Last name</label>
+                        {{ name_form.last_name }}
+                        {% if name_form.last_name.errors %}
+                        <div class="text-danger">{{ name_form.last_name.errors }}</div>
+                    {% endif %}
                 </div>
 
-                <button type="submit" class="btn btn-primary"
-                    {% if is_edit %}onclick="return confirm('Save changes to this record?');"{% endif %}>
-                    {% if is_edit %}Save Changes{% else %}Next{% endif %}
-                </button>
+                <h3>Address</h3>
+
+                <div class="mb-3">
+                    <label class="form-label" for="{{ address_form.house_no.id_for_label }}">House no</label>
+                        {{ address_form.house_no }}
+                        {% if address_form.house_no.errors %}
+                        <div class="text-danger">{{ address_form.house_no.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="{{ address_form.house_name.id_for_label }}">House name</label>
+                        {{ address_form.house_name }}
+                        {% if address_form.house_name.errors %}
+                        <div class="text-danger">{{ address_form.house_name.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="{{ address_form.street.id_for_label }}">Street</label>
+                        {{ address_form.street }}
+                        {% if address_form.street.errors %}
+                        <div class="text-danger">{{ address_form.street.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="{{ address_form.town.id_for_label }}">Town</label>
+                        {{ address_form.town }}
+                        {% if address_form.town.errors %}
+                        <div class="text-danger">{{ address_form.town.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                        <label class="form-label" for="{{ address_form.post_code.id_for_label }}">Post code</label>
+                        {{ address_form.post_code }}
+                        {% if address_form.post_code.errors %}
+                        <div class="text-danger">{{ address_form.post_code.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
     </div>
-    {% endblock %}
+{% endblock %}

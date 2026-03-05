@@ -77,6 +77,18 @@ WSGI_APPLICATION = 'ThePostOffice.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'LocalPostOffice',
+        'USER' : 'localpostoffice',
+        'PASSWORD' : 'password',
+        'HOST' : 'localhost',
+        'PORT' : '3306',
+
+    }
+}
+
+"""DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'bnargymiqxix3z2xrke5',
         'USER' : 'udzzbe1u0ewqhm2q',
         'PASSWORD' : 'TYQ0GCvcklhDCB3NPcBz',
@@ -84,8 +96,7 @@ DATABASES = {
         'PORT' : '3306',
 
     }
-}
-
+}"""
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators

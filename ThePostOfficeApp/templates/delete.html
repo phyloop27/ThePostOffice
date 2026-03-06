@@ -6,7 +6,7 @@
     {% block content %}
     <div class="container mt-4">
         <div class="col-lg-6 mx-auto student-records">
-            <p>Are you sure you want to delete <strong>{{ Name.first_name }} {{ Name.last_name }}</strong>?</p>
+            <p>Are you sure you want to delete <strong>{{ customer.first_name }} {{ customer.last_name }}</strong>?</p>
 
             <form method="post">
             {% csrf_token %}

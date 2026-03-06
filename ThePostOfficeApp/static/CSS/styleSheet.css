@@ -62,3 +62,66 @@
 .student-records {
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
+
+/* Login Page CSS */
+.login-container {
+    width: 50%;
+    max-width: 400px;
+    padding: 35px;
+    background: #ffffff;
+    border-radius: 15px;
+    border: 2px solid #686f94;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    text-align: center;
+}
+
+.login-title {
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 26px;
+    font-weight: 600;
+    color: #1e3a5f;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+.form-group {
+    margin-bottom: 18px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #333;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #2f6fb2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.login-btn:hover {
+    background-color: #24548a;
+}
+
+body {
+    background: linear-gradient(135deg, #eef3f8, #d9e2ec);
+}

@@ -2,6 +2,7 @@ from .forms import *
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.utils.timezone import now
 from .models import *
 from django.db import transaction
 
@@ -14,20 +15,16 @@ def staffLogin(request):
     if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")
-
-        print("USERNAME:", username)
-        print("PASSWORD ENTERED:", password)
-
         user = authenticate(request, username=username, password=password)
-        print("AUTH USER:", user)
+
 
         if user is not None:
             login(request, user)
-            print("LOGIN SUCCESS")
+            # import user login timestamp for side bar
+            request.session["login_time"] = now().strftime("%d/%m/%Y %H:%M:%S")
             return redirect("home")
 
         else:
-            print("LOGIN FAILED")
             return render(request, "login.html", {
                 "error": "Invalid Credentials, please try again."})
 

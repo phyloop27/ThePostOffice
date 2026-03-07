@@ -4,6 +4,16 @@
     {% block header %}Form has been successfully submitted{% endblock %}
 
     {% block content %}
-        <!-- Insert page contents here -->
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="login-container">
+            <div class="align-items-center gap-2 mb-3">
+                <h4 class="login-title">Form Submission Successful, Waiting to Redirect </h4>
+                <p>Redirecting in <span id="countdown">5</span> seconds...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript file location for specific HTML page -->
+    <script src="../static/javascript/form_success.js" async></script>
 
     {% endblock %}

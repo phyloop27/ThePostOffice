@@ -30,19 +30,6 @@
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
-/* CSS for PAC Form page
-.pac-form {
-    border: 2px solid #414247;
-    border-radius: 10px;
-    padding: 20px;
-    background-color: #ffffff;
-}
-
-.pac-form {
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-}
-*/
-
 /* CSS for Student Record page */
 .student-records {
     border: 2px solid #686f94;
@@ -109,7 +96,7 @@
 .login-btn {
     width: 100%;
     padding: 10px;
-    background-color: #2f6fb2;
+    background-color: #0d6efd;
     color: white;
     border: none;
     border-radius: 5px;
@@ -124,4 +111,27 @@
 
 body {
     background: linear-gradient(135deg, #eef3f8, #d9e2ec);
+}
+
+/* Log out button */
+.logout-btn {
+    display: inline-block;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    background-color: #2f6fb2;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+.page-title {
+    font-family: "Segoe UI", sans-serif;
+    font-size: 36px;
+    font-weight: 600;
+    color: #1e3a5f;
+    text-align: left;
+    margin-bottom: 20px;
+    margin-left: 25px;
 }

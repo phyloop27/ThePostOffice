@@ -14,6 +14,9 @@
     <!-- Code to CDN Bootstrap CSS Remote repository -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- Favicon - Tab icon -->
+    <link rel="icon" type="image/x-icon" href="../static/image/favicon.ico">
+
     <!-- Font Awesome - Webpage icons -->
     <script src="https://kit.fontawesome.com/f382cfac43.js" crossorigin="anonymous"></script>
 
@@ -30,7 +33,7 @@
             <button class="btn btn-outline-secondary" type="button"
                     data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas"
                     aria-controls="sidebarOffcanvas" aria-label="Open menu">
-                <i class="fa-solid fa-bars"></i>
+                    <i class="fa-solid fa-bars"></i>
             </button>
 
             <span class="navbar-text ms-2">
@@ -42,38 +45,46 @@
 <!-- Desktop sidebar  -->
     <div class="d-none d-lg-flex flex-column position-fixed top-0 start-0 bg-light border-end p-3 sidebar-desktop">
         <a href="/home/" class="d-flex align-items-center mb-3 text-decoration-none link-dark">
-            <span class="fs-4">The Post Office</span>
+            <span class="fs-4">The Local Post Office</span>
         </a>
 
-    <hr>
-    <ul class="nav nav-pills flex-column mb-auto">
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
 
-		<li class="nav-item">
-            <a class="nav-link link-dark" href="/home/">
-                <i class="fa-solid fa-house me-1"></i> Home</a>
-        </li>
+                <li class="nav-item">
+                    <a class="nav-link link-dark" href="/home/">
+                        <i class="fa-solid fa-house me-1"></i> Home</a>
+                </li>
 
-        <li class="nav-item">
-            <a class="nav-link link-dark" href="/formName/">
-                <i class="fa-solid fa-file me-2"></i> Postage Form</a>
-        </li>
+                <li class="nav-item">
+                    <a class="nav-link link-dark" href="/formName/">
+                        <i class="fa-solid fa-file me-2"></i> Postage Form</a>
+                </li>
 
-        <li class="nav-item">
-            <a class="nav-link link-dark" href="/customerDetails/">
-                <i class="fa-solid fa-people-line"></i> Customers</a>
-        </li>
+                <li class="nav-item">
+                    <a class="nav-link link-dark" href="/customerDetails/">
+                        <i class="fa-solid fa-people-line"></i> Customers</a>
+                </li>
 
-        <li class="nav-item">
-            <a class="nav-link link-dark" href="/postedItems/">
-                <i class="fa-solid fa-box me-2"></i> Posted Items</a>
-        </li>
-    </ul>
+                <li class="nav-item">
+                    <a class="nav-link link-dark" href="/postedItems/">
+                        <i class="fa-solid fa-box me-2"></i> Posted Items</a>
+                </li>
+            </ul>
 
-    <hr>
-        <div class="text-muted small">
-            Welcome to The Post Office
-        </div>
-    </div>
+            {% if user.is_authenticated %}
+                <div class="sidebar-user-panel">
+                    <p class="sidebar-user-name"> Logged in as: {{ user.username }}</p>
+                    <p class="sidebar-login-time">{{ request.session.login_time }}</p>
+                    <a href="{% url 'logout' %}" class="btn btn-sm btn-outline-primary">Logout</a>
+                </div>
+            {% endif %}
+
+            <hr>
+                <div class="text-muted small">
+                    Welcome to The Local Post Office
+                </div>
+            </div>
 
 <!-- Mobile sidebar  -->
     <div class="offcanvas offcanvas-start bg-light" tabindex="-1" id="sidebarOffcanvas" aria-labelledby="sidebarOffcanvasLabel">
@@ -106,9 +117,17 @@
                 </li>
             </ul>
 
+            {% if user.is_authenticated %}
+                <div class="sidebar-user-panel">
+                    <p class="sidebar-user-name"> Logged in as: {{ user.username }}</p>
+                    <p class="sidebar-login-time">{{ request.session.login_time }}</p>
+                    <a href="{% url 'logout' %}" class="btn btn-sm btn-outline-primary">Logout</a>
+                </div>
+            {% endif %}
+
             <hr>
             <div class="text-muted small">
-                Welcome to The Post Office
+                Welcome to The Local Post Office
             </div>
         </div>
     </div>
@@ -116,7 +135,7 @@
 <!-- Main content area -->
     <div class="main-with-sidebar p-4">
 
-        <header class="mb-3">
+        <header class="page-title">
             <h2>{% block header %}{% endblock %}</h2>
         </header>
 
@@ -128,6 +147,9 @@
 
 <!-- Bootstrap java script CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- JavaScript file location for specific HTML page -->
+<script src="../static/javascript/form_success.js" async></script>
 
 </body>
 </html>

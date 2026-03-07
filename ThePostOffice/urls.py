@@ -5,15 +5,13 @@ from ThePostOfficeApp import views
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path('landing/', views.landing, name='landing'),
+    path('', views.landing, name='landing'),
 
     path('staffLogin/', views.staffLogin, name='staffLogin'),
 
     path("staffLogout/", views.staffLogout, name="logout"),
 
     path('home/', views.home, name='home'),
-
-    path('', views.home, name='home'), # Remove this On completion!! Change to Login page!!!!
 
     path('formName/', views.formName, name='formName'),
 

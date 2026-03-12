@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-e%6n^mwltdg)g=h8q*0^-5l%21p+!#!7hla5z(h60j)wxw(q*b
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['thepostoffice.onrender.com']
+ALLOWED_HOSTS = ['thepostoffice.onrender.com', '127.0.0.1']
 
 LOGIN_URL = "staffLogin"
 LOGIN_REDIRECT_URL = "home"
@@ -77,6 +77,8 @@ WSGI_APPLICATION = 'ThePostOffice.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
+# Locally Hosted Database in MyWorkBench
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -88,8 +90,9 @@ DATABASES = {
         'TEST': {
             'NAME': 'test_localpostoffice'},
     }
-}
+}'''
 
+# Database on CleverCloud 'PostOffice'
 """DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -101,6 +104,19 @@ DATABASES = {
 
     }
 }"""
+
+# Database on CleverCloud 'The Post Office'
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'bmevb4cpyf3zgbal44x0',
+        'USER' : 'ursf3q2ecoh6ta8l',
+        'PASSWORD' : 'D5voZmuYkLv0RtK7QSul',
+        'HOST' : 'bmevb4cpyf3zgbal44x0-mysql.services.clever-cloud.com',
+        'PORT' : '3306',
+
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators

@@ -1,31 +1,54 @@
 {% extends 'base.html' %}
+{% load static %}
 
-    {% block title %}Posted Items{% endblock %}
-    {% block header %}Posted Items Records{% endblock %}
+{% block title %}Posted Items{% endblock %}
+{% block header %}Posted Item Records{% endblock %}
 
-    {% block content %}
-        <div class="container-fluid mt-4">
-              <div class="student-records">
-                    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
-                        <h4 class="mb-0">Parcel Records</h4>
-                    </div>
-                    <!-- Table record headings  -->
-                    {% if parcel_list %}
-                        <div class="table-responsive">
-                          <table class="table table-striped align-middle">
-                            <thead>
-                                <tr>
+{% block content %}
+
+    <div class="container-fluid mt-4">
+        <div class="student-records">
+
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+                <h4 class="mb-0">Search Posted Items</h4>
+            </div>
+
+            <div class="search-bar-container mb-4">
+                <input
+                    type="text"
+                    id="postedItemsSearch"
+                    class="form-control search-input"
+                    placeholder="Search parcel and letter records...">
+
+                <p id="noResultsMessage" class="text-muted mt-2 mb-0" style="display: none;">
+                    No matching records found.
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="container-fluid mt-4">
+        <div class="student-records">
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+                <h4 class="mb-0">Parcel Records</h4>
+            </div>
+
+            {% if parcel_list %}
+                <div class="table-responsive">
+                    <table class="table table-striped align-middle" id="parcelTable">
+                        <thead>
+                            <tr>
                                 <th>Address</th>
                                 <th>Courier</th>
                                 <th>Parcel Sent</th>
                                 <th>Service</th>
                                 <th>Weight</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
+                            </tr>
+                        </thead>
+                        <tbody>
                             {% for n in parcel_list %}
-                                <tr>
+                                <tr class="searchable-row parcel-row">
                                     <td>{{ n.address }}</td>
                                     <td>{{ n.courier }}</td>
                                     <td>{{ n.parcel_sent }}</td>
@@ -33,46 +56,49 @@
                                     <td>{{ n.weight }}</td>
                                 </tr>
                             {% endfor %}
-                            </tbody>
-                        </table>
-                        </div>
-                    {% else %}
-                        <p class="text-muted mb-0">No Details Found.</p>
-                    {% endif %}
-              </div>
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p class="text-muted mb-0">No Details Found.</p>
+            {% endif %}
         </div>
+    </div>
 
-        <div class="container-fluid mt-4">
-              <div class="student-records">
-                    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
-                        <h4 class="mb-0">Letter Records</h4>
-                    </div>
-                        <!-- Table record headings  -->
-                        {% if letter_list %}
-                            <div class="table-responsive">
-                              <table class="table table-striped align-middle">
-                                <thead>
-                                    <tr>
-                                    <th>Address</th>
-                                    <th>Letter Sent</th>
-                                    <th>Class</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+    <div class="container-fluid mt-4">
+        <div class="student-records">
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+                <h4 class="mb-0">Letter Records</h4>
+            </div>
 
-                                {% for p in letter_list %}
-                                    <tr>
-                                        <td>{{ p.address }}</td>
-                                        <td>{{ p.letter_sent }}</td>
-                                        <td>{{ p.class_field }}</td>
-                                    </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
-                            </div>
-                        {% else %}
-                            <p class="text-muted mb-0">No Details Found.</p>
-                        {% endif %}
-              </div>
+            {% if letter_list %}
+                <div class="table-responsive">
+                    <table class="table table-striped align-middle" id="letterTable">
+                        <thead>
+                            <tr>
+                                <th>Address</th>
+                                <th>Letter Sent</th>
+                                <th>Class</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for p in letter_list %}
+                                <tr class="searchable-row letter-row">
+                                    <td>{{ p.address }}</td>
+                                    <td>{{ p.letter_sent }}</td>
+                                    <td>{{ p.class_field }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p class="text-muted mb-0">No Details Found.</p>
+            {% endif %}
         </div>
-    {% endblock %}
+    </div>
+
+    <!-- JavaScript file location for specific HTML page -->
+    <script src="{% static 'javascript/posted_items.js' %}"></script>
+
+{% endblock %}

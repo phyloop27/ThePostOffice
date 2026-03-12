@@ -135,3 +135,16 @@ body {
     margin-bottom: 20px;
     margin-left: 25px;
 }
+
+/* Search bar CSS */
+.search-input {
+    max-width: 400px;
+    border-radius: 8px;
+    padding: 10px 14px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.search-input:focus {
+    border-color: #2f6fb2;
+    box-shadow: 0 0 0 3px rgba(47, 111, 178, 0.15);
+}

@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-e%6n^mwltdg)g=h8q*0^-5l%21p+!#!7hla5z(h60j)wxw(q*b
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['thepostoffice.onrender.com']
 
 LOGIN_URL = "staffLogin"
 LOGIN_REDIRECT_URL = "home"
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ThePostOfficeApp.apps.ThepostofficeappConfig',
+    "ThePostOffice",
 ]
 
 MIDDLEWARE = [
@@ -80,10 +81,11 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'LocalPostOffice',
         'USER' : 'localpostoffice',
-        'PASSWORD' : 'password',
+        'PASSWORD' : 'Password@123',
         'HOST' : 'localhost',
         'PORT' : '3306',
-
+        'TEST': {
+            'NAME': 'test_localpostoffice'},
     }
 }
 

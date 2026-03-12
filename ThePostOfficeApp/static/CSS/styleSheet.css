@@ -32,22 +32,15 @@
 
 /* CSS for Student Record page */
 .student-records {
-    border: 2px solid #686f94;
-    border-radius: 10px;
-    padding: 20px;
-    background-color: #ffffff;
-}
-
-.student-records {
-    border-radius: .8rem 1rem;
+    /*border-radius: .8rem 1rem;*/
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.28);
     overflow: hidden;
     max-width: 1400px;
     min-width: 0;
-}
-
-.student-records {
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    border: 2px solid #686f94;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #ffffff;
 }
 
 /* Login Page CSS */

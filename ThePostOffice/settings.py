@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-e%6n^mwltdg)g=h8q*0^-5l%21p+!#!7hla5z(h60j)wxw(q*b'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['thepostoffice.onrender.com', '127.0.0.1']
 
